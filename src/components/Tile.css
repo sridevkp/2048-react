@@ -1,0 +1,60 @@
+.Tile{
+    border: 5px outset cornflowerblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 900;
+    font-size: xx-large;
+    background-color: hsl(219, 100%, 80%);
+    color: white;
+    z-index: 10;
+    transition: all .2s;
+    position: relative;
+    grid-row: 1;
+    grid-column: 1;
+    animation: fadein .1s ease-in-out;
+}
+.tile-4{
+    background-color: hsl(219, 100%, 75%);
+}
+.tile-8{
+    background-color: hsl(219, 100%, 70%);
+}
+.tile-16{
+    background-color: hsl(219, 100%, 65%);
+}
+.tile-32{
+    background-color: hsl(219, 100%, 60%);
+}
+.tile-64{
+    background-color: hsl(219, 100%, 50%);
+}
+.tile-128{
+    background-color: hsl(219, 100%, 45%);
+}
+.tile-256{
+    background-color: hsl(219, 100%, 35%);
+}
+.tile-512{
+    background-color: hsl(219, 100%, 25%);
+}
+.tile-1024{
+    background-color: hsl(219, 100%, 15%);
+}
+.tile-2048{
+    background-color: hsl(219, 100%, 10%);
+}
+.merged{
+    display: none;
+}
+
+@keyframes fadein {
+    from{
+        transform: scale(.8);
+        opacity: 0;
+    }
+    to{
+        transform: scale(1);
+        opacity: 1;
+    }
+}

@@ -1,0 +1,6 @@
+.Game{
+    grid-area: game;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

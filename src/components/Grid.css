@@ -1,0 +1,24 @@
+.Grid-container{
+    width: 100%;
+    aspect-ratio: 1;
+    position: relative;
+    border: 5px inset cornflowerblue;
+}
+.grid{ 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    gap : .5em;
+    grid-template-columns: repeat(4,1fr);
+    grid-template-rows: repeat(4,1fr);
+    padding: .5em;
+}
+.Grid-bg{
+    position: absolute;
+    /* z-index: -1; */
+}
+.Grid-bg-cell{
+    background-color: rgba(37, 95, 203, 0.301);
+}

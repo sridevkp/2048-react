@@ -1,38 +1,34 @@
-.App {
-  text-align: center;
+.App{
+    color: #776e65;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr minmax(400px,1fr) 1fr;
+    grid-template-areas: 'instructions game scoreboard';
+    gap: 1em;
+    padding: 1em;
+    box-sizing: border-box;
+    background-color:whitesmoke;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.instructions{
+    grid-area: instructions;
+    background-color: rgba(37, 95, 203, 0.301);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.scoreboard{
+    grid-area: scoreboard;
+    background-color: rgba(37, 95, 203, 0.301);
+}
+
+@media only screen and (max-width: 600px) {
+    .App {
+        grid-template-columns: 1fr;
+        height: 300vh;
+        grid-template-rows: repeat(3,1fr);
+        grid-template-areas: 
+        'game'
+        'scoreboard'
+        'instructions';
+    }
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
