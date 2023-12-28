@@ -14,7 +14,7 @@ const Grid = ( {tiles} ) => {
                 <div className="Grid grid">
                     {
                         tiles.map( tile => {
-                            return <Tile val={tile.val} x={tile.x} y={tile.y} key={tile.key}/>
+                            return <Tile val={tile.val} x={tile.x} y={tile.y} key={tile.key} merged={tile.merged}/>
                         })
                     }
                 </div>

@@ -2,6 +2,7 @@ import React from 'react'
 import './Game.css'
 import Grid from './Grid'
 import Board from '../models/Board'
+import { throttle } from "lodash";
 
 class Game extends React.Component{
     state = {
@@ -12,6 +13,7 @@ class Game extends React.Component{
         super( props )
         this.state.board.updateTiles( true )
         this.state.board.updateTiles( true )
+        this.throttledHandleKeyDown = throttle( this.handleKeyDown.bind(this), 200, {trailing:false})
     }
     handleKeyDown(e){
         e.preventDefault()
@@ -40,7 +42,10 @@ class Game extends React.Component{
         console.log("updated")
     }
     componentDidMount(){
-        window.addEventListener('keydown', this.handleKeyDown.bind(this) )
+        window.addEventListener('keydown', this.throttledHandleKeyDown )
+    }
+    componentWillUnmount(){
+        window.removeEventListener('keydown', this.throttledHandleKeyDown )
     }
     render(){
         return <div className='Game'>

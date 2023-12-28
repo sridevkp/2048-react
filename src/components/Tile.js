@@ -1,7 +1,7 @@
-import { useEffect } from 'react'
+// import useTimeout from '../hooks/useTimeout'
 import './Tile.css'
 
-const Tile = ({ val, x, y }) => {
+const Tile = ({ val, x, y, merged }) => {
     const style = () => {
         const [i,j] = [x,y]// [x-1,y-1]
         return {
@@ -9,7 +9,7 @@ const Tile = ({ val, x, y }) => {
             left : `calc(${i}00% + ${i*.25}em)`
         }
     }
-    return <div className={`Tile tile-${val}`} style={style()}>{val}</div>
+    return <div className={`Tile tile-${val} ${merged?'merged':''}`} style={style()}>{val}</div>
 }
 
 export default Tile

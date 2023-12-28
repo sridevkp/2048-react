@@ -6,11 +6,15 @@ function randFromArray( l ){
 
 class Board{
     board 
+    animationDuration = 200
+    lastKey = 0
+    tiles
+    filled 
+    
     constructor(){
         this.board = this.createBoard()
         this.filled = false
         this.tiles = []
-        this.lastKey = 0
     }
     createBoard(){
         return Array(4).fill().map( i => Array(4).fill(null) )
@@ -45,6 +49,23 @@ class Board{
         this.tiles.push( tile )
         this.board[y][x] = tile
     }
+    removeTile( ...tiles){
+        tiles.forEach( tile => {
+            tile.merged = true
+            const index = this.tiles.indexOf( tile )
+            if( index != -1 ) this.tiles.splice( index, 1)
+        })
+    }
+    mergeTiles( cell, tile1, tile2 ){
+        tile1.x = cell.x
+        tile1.y = cell.y
+        tile2.x = cell.x
+        tile2.y = cell.y
+        tile1.merged = true
+        tile2.merged = true
+        setTimeout( () => { this.removeTile( tile1, tile2 )}, this.animationDuration )
+        this.addTile(cell)
+    }
     moveUp(){
         for( let col = 0; col < 4; col++){
             const emptyCell = []
@@ -71,16 +92,13 @@ class Board{
                     } 
                 }else{//move n merge
                     lastCell = {}
-
-                    this.tiles.splice( this.tiles.indexOf(tile),1)
-                    this.tiles.splice( this.tiles.indexOf(this.board[ last ][col]),1)
-                    
-                    this.addTile({
+                    const cellData = {
                         val : tile.val * 2,
                         x : col,
                         y : last
-                    })
-
+                    }
+                    this.mergeTiles( cellData, tile, this.board[ last ][col] )
+            
                     this.board[ k ][col] = null
                     if(upperMost != null) emptyCell.push(upperMost)
                     emptyCell.unshift( k )
@@ -115,15 +133,12 @@ class Board{
                     } 
                 }else{//move n merge
                     lastCell = {}
-
-                    this.tiles.splice( this.tiles.indexOf(tile),1)
-                    this.tiles.splice( this.tiles.indexOf(this.board[ last ][col]),1)
-                    
-                    this.addTile({
+                    const cellData = {
                         val : tile.val * 2,
                         x : col,
                         y : last
-                    })
+                    }
+                    this.mergeTiles( cellData, tile, this.board[ last ][col])
 
                     this.board[ k ][col] = null
                     if(lowerMost != null) emptyCell.push(lowerMost)
@@ -159,15 +174,13 @@ class Board{
                     } 
                 }else{//move n merge
                     lastCell = {}
-
-                    this.tiles.splice( this.tiles.indexOf(tile),1)
-                    this.tiles.splice( this.tiles.indexOf(this.board[ row ][ last ]),1)
-                    
-                    this.addTile({
+                    const cellData = {
                         val : tile.val * 2,
                         x : last,
                         y : row
-                    })
+                    }
+
+                    this.mergeTiles( cellData, tile, this.board[ row ][ last ] )
 
                     this.board[ row ][ k ] = null
                     if(leftMost != null) emptyCell.push(leftMost)
@@ -203,15 +216,13 @@ class Board{
                     } 
                 }else{//move n merge
                     lastCell = {}
-
-                    this.tiles.splice( this.tiles.indexOf(tile),1)
-                    this.tiles.splice( this.tiles.indexOf(this.board[ row ][ last ]),1)
-                    
-                    this.addTile({
+                    const cellData = {
                         val : tile.val * 2,
                         x : last,
                         y : row
-                    })
+                    }
+
+                    this.mergeTiles( cellData, tile, this.board[ row ][ last ] )
 
                     this.board[ row ][ k ] = null
                     if(rightMost != null) emptyCell.push(rightMost)
